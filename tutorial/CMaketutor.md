@@ -175,7 +175,32 @@ dashboard：
 #endif
   ```
 
+## 添加自定义命令和生成文件
+- 编写一个cmake脚本：
+  ```cmake
+    add_executable(MakeTable MakeTable.cxx)
 
+    target_link_libraries(MakeTable PRIVATE tutorial_compiler_flags)
 
+    # 自定义命令
+    add_custom_command(
+            OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/Table.h
+            COMMAND MakeTable ${CMAKE_CURRENT_BINARY_DIR}/Table.h
+            DEPENDS MakeTable
+        )
+  ```   
+-  include(MakeTable.cmake)
+-  将自定义生成的头文件链接到目标中，并且在include路径中包含
+  ```cmake
+    add_library(SqrtLibrary STATIC
+              mysqrt.cxx
+              ${CMAKE_CURRENT_BINARY_DIR}/Table.h
+              )
+    target_include_directories(SqrtLibrary PRIVATE
+                             ${CMAKE_CURRENT_BINARY_DIR}
+                             )
+
+  ``` 
+-   这样在源码中包含生成的头文件并调用其中的函数（变量）
 
 偏偏 这地球这么挤这么小这么瘦 太阳刻意晒的那么凶
