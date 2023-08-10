@@ -52,6 +52,30 @@ target_include_directories():  add the binary tree to the search path for includ
   - add_library(tutorial_compiler_flags INTERFACE)：接口库通常用于定义接口和属性，而不包含实际的源代码。
   - target_compile_features(tutorial_compiler_flags INTERFACE cxx_std_11)：将 C++11 标准作为接口的编译要求。这表示任何使用这个接口库的目标都需要支持 C++11 标准。
 
+##  添加生成表达式
+-   `set(gcc_like_cxx "$<COMPILE_LANG_AND_ID:CXX,ARMClang,AppleClang,Clang,GNU,LCC>")`：
+    这部分定义了一个变量 gcc_like_cxx，它使用条件表达式 $<COMPILE_LANG_AND_ID:...> 来判断当前编译环境是否为像 GCC 或 Clang 这样的 C++ 编译器。如果当前编译器符合条件，那么这个变量将被设置为 1，否则为 0。
+-   `set(msvc_cxx "$<COMPILE_LANG_AND_ID:CXX,MSVC>")`
+    这部分定义了一个变量 msvc_cxx，它使用条件表达式 $<COMPILE_LANG_AND_ID:...> 来判断当前编译环境是否为 Microsoft Visual C++ 编译器（MSVC）。如果当前编译器符合条件，那么这个变量将被设置为 1，否则为 0。
+使用上述两个变量的例子：
+-   Add warning flag compile options to the interface library tutorial_compiler_flags.
+     * For gcc_like_cxx, add flags -Wall;-Wextra;-Wshadow;-Wformat=2;-Wunused
+     * For msvc_cxx, add flags -W3
+     Hint: Use target_compile_options()
+```cmake
+target_compile_options(tutorial_compiler_flags INTERFACE
+  "$<${gcc_like_cxx}:-Wall;-Wextra;-Wshadow;-Wformat=2;-Wunused>"
+  "$<${msvc_cxx}:-W3>"
+)
+```
+-   With nested generator expressions, only use the flags for thebuild-tree
+ Hint: Use BUILD_INTERFACE
+ ```cmake
+ target_compile_options(tutorial_compiler_flags INTERFACE
+  "$<${gcc_like_cxx}:$<BUILD_INTERFACE:-Wall;-Wextra;-Wshadow;-Wformat=2;-Wunused>>"
+  "$<${msvc_cxx}:$<BUILD_INTERFACE:-W3>>"
+)
+ ```
 
 
 
