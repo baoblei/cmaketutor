@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Site BuildName="Darwin-c++"
+	BuildStamp="20230810-1513-Experimental"
+	Name="baobingleideMacBook-Air.local"
+	Generator="ctest-3.26.3"
+	CompilerName="/Library/Developer/CommandLineTools/usr/bin/c++"
+	CompilerVersion="14.0.0.14000029"
+	OSName="macOS"
+	Hostname="baobingleideMacBook-Air.local"
+	OSRelease="13.2.1"
+	OSVersion="22D68"
+	OSPlatform="x86_64"
+	Is64Bits="1"
+	VendorString=""
+	VendorID="Unknown Manufacturer"
+	FamilyID="6"
+	ModelID="0"
+	ProcessorCacheSize="131072"
+	NumberOfLogicalCPU="8"
+	NumberOfPhysicalCPU="8"
+	TotalVirtualMemory="5120"
+	TotalPhysicalMemory="8192"
+	LogicalProcessorsPerPhysical="8"
+	ProcessorClockFrequency="2400"
+	>
+	<Configure>
+		<StartDateTime>Aug 10 23:13 CST</StartDateTime>
+		<StartConfigureTime>1691680386</StartConfigureTime>
+		<ConfigureCommand>"/Applications/CMake.app/Contents/bin/cmake" "/Users/baobinglei/cmaketutor/Step6"</ConfigureCommand>
+		<Log>-- Configuring done (0.1s)
+-- Generating done (0.0s)
+-- Build files have been written to: /Users/baobinglei/cmaketutor/Step6_build
+</Log>
+		<ConfigureStatus>0</ConfigureStatus>
+		<EndDateTime>Aug 10 23:13 CST</EndDateTime>
+		<EndConfigureTime>1691680386</EndConfigureTime>
+		<ElapsedMinutes>0</ElapsedMinutes>
+	</Configure>
+</Site>

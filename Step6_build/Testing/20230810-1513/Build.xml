@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Site BuildName="Darwin-c++"
+	BuildStamp="20230810-1513-Experimental"
+	Name="baobingleideMacBook-Air.local"
+	Generator="ctest-3.26.3"
+	CompilerName="/Library/Developer/CommandLineTools/usr/bin/c++"
+	CompilerVersion="14.0.0.14000029"
+	OSName="macOS"
+	Hostname="baobingleideMacBook-Air.local"
+	OSRelease="13.2.1"
+	OSVersion="22D68"
+	OSPlatform="x86_64"
+	Is64Bits="1"
+	VendorString=""
+	VendorID="Unknown Manufacturer"
+	FamilyID="6"
+	ModelID="0"
+	ProcessorCacheSize="131072"
+	NumberOfLogicalCPU="8"
+	NumberOfPhysicalCPU="8"
+	TotalVirtualMemory="5120"
+	TotalPhysicalMemory="8192"
+	LogicalProcessorsPerPhysical="8"
+	ProcessorClockFrequency="2400"
+	>
+	<Build>
+		<StartDateTime>Aug 10 23:13 CST</StartDateTime>
+		<StartBuildTime>1691680386</StartBuildTime>
+		<BuildCommand>/Applications/CMake.app/Contents/bin/cmake --build . --config "Release"</BuildCommand>
+		<Log Encoding="base64" Compression="bin/gzip"/>
+		<EndDateTime>Aug 10 23:13 CST</EndDateTime>
+		<EndBuildTime>1691680388</EndBuildTime>
+		<ElapsedMinutes>0</ElapsedMinutes>
+	</Build>
+</Site>

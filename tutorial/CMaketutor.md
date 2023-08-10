@@ -121,6 +121,21 @@ install(FILES "${PROJECT_BINARY_DIR}/TutorialConfig.h"
         ```
         利用函数来测试
 
+### ctest -VV -D Experimental
+ctest 可执行文件将构建项目（不用在本地构建）、运行任何测试并将结果提交到 Kitware 的公共仪表板：https://my.cdash.org/index.php?project=CMakeTutorial。
+源代码目录下包含CTestConfig.cmake 文件：
+```cmake
+set(CTEST_PROJECT_NAME "CMakeTutorial")
+set(CTEST_NIGHTLY_START_TIME "00:00:00 EST")
+
+set(CTEST_DROP_METHOD "http")
+set(CTEST_DROP_SITE "my.cdash.org")
+set(CTEST_DROP_LOCATION "/submit.php?project=CMakeTutorial")
+set(CTEST_DROP_SITE_CDASH TRUE)
+```
+dashboard：
+![](https://cdn.jsdelivr.net/gh/baoblei/imgs_md/20230810231743.png)
+
 
 
 
