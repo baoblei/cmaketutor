@@ -31,7 +31,7 @@ target_include_directories(Tutorial PUBLIC
 -   cmake ../Step1    ("构建文件在Step1文件夹下")
 -   cmake --build .
 
-##库
+## 库
 #### 创建库
 add_library():
 add_subdirectory(): 处理另一个目录下的CMakeLists.txt 文件
@@ -44,7 +44,13 @@ target_include_directories():  add the binary tree to the search path for includ
     -  add_library()
     -  target_link_libraried()
 
-  
+
+## 添加库的使用要求
+- target_include_directories(name INTERFACE ${CMAKE_CURRENT_SOURCE_DIR}):
+    通过将源代码目录添加为接口包含路径，你可以确保任何依赖于 "MathFunctions" 目标的其他目标都能够访问 "MathFunctions" 子目录中的头文件。这对于实现模块化、解耦和复用代码非常有用。
+- 添加接口库设定编译要求
+  - add_library(tutorial_compiler_flags INTERFACE)：接口库通常用于定义接口和属性，而不包含实际的源代码。
+  - target_compile_features(tutorial_compiler_flags INTERFACE cxx_std_11)：将 C++11 标准作为接口的编译要求。这表示任何使用这个接口库的目标都需要支持 C++11 标准。
 
 
 
