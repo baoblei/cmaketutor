@@ -40,7 +40,7 @@ target_include_directories():  add the binary tree to the search path for includ
 
 -   添加可选条件
     -  option()
-    -  target_compile_definetions(name info USE_MYMATH):  set the compile definition "USE_MYMATH"
+    -  target_compile_definetions(target INTERFACE|PUBLIC|..  [items]):  set the compile definition "USE_MYMATH"
     -  add_library()
     -  target_link_libraried()
 
@@ -136,7 +136,44 @@ set(CTEST_DROP_SITE_CDASH TRUE)
 dashboard：
 ![](https://cdn.jsdelivr.net/gh/baoblei/imgs_md/20230810231743.png)
 
-
+## 添加系统自省
+- 首先添加CheckCXXSourceCmompiles 模块
+    `include(CheckCXXSourceCompiles)`
+-   编写测试是否可用的函数并返回 变量
+```cmake
+ check_cxx_source_compiles("
+    #include <cmath>
+    int main() {
+      std::log(1.0);
+      return 0;
+    }
+  " HAVE_LOG)
+  check_cxx_source_compiles("
+    #include <cmath>
+    int main() {
+      std::exp(1.0);
+      return 0;
+    }
+  " HAVE_EXP)
+```
+-   再把返回的变量传递给源代码
+```cmake
+  if(HAVE_LOG AND HAVE_EXP)
+    target_compile_definitions(SqrtLibrary
+                               PRIVATE "HAVE_LOG" "HAVE_EXP"
+                               )
+  endif()
+```
+-   源代码中测试
+  ```cmake
+  #if defined(HAVE_LOG) && defined(HAVE_EXP)
+  double result = std::exp(std::log(x) * 0.5);
+  std::cout << "Computing sqrt of " << x << " to be " << result
+            << " using log and exp" << std::endl;
+#else
+  original code
+#endif
+  ```
 
 
 
