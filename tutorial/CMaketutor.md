@@ -57,6 +57,7 @@ target_include_directories():  add the binary tree to the search path for includ
     这部分定义了一个变量 gcc_like_cxx，它使用条件表达式 $<COMPILE_LANG_AND_ID:...> 来判断当前编译环境是否为像 GCC 或 Clang 这样的 C++ 编译器。如果当前编译器符合条件，那么这个变量将被设置为 1，否则为 0。
 -   `set(msvc_cxx "$<COMPILE_LANG_AND_ID:CXX,MSVC>")`
     这部分定义了一个变量 msvc_cxx，它使用条件表达式 $<COMPILE_LANG_AND_ID:...> 来判断当前编译环境是否为 Microsoft Visual C++ 编译器（MSVC）。如果当前编译器符合条件，那么这个变量将被设置为 1，否则为 0。
+
 使用上述两个变量的例子：
 -   Add warning flag compile options to the interface library tutorial_compiler_flags.
      * For gcc_like_cxx, add flags -Wall;-Wextra;-Wshadow;-Wformat=2;-Wunused
@@ -76,6 +77,49 @@ target_compile_options(tutorial_compiler_flags INTERFACE
   "$<${msvc_cxx}:$<BUILD_INTERFACE:-W3>>"
 )
  ```
+
+## 安装
+-  将所有库（.a/.so）安装在lib文件夹中
+-  将头文件（.h）安装在include文件夹中
+-  将可执行文件安装在bin文件夹中
+-  命令：sudo cmake --install . --prefix "/Users/baobinglei/cmaketutor/Step5_build/release" 
+```cmake
+set(installable_libs MathFunctions tutorial_compiler_flags)
+install(TARGETS ${installable_libs} DESTINATION lib)
+install(FILES MathFunctions.h DESTINATION include)
+install(TARGETS Tutorial DESTINATION bin)
+install(FILES "${PROJECT_BINARY_DIR}/TutorialConfig.h"
+  DESTINATION include
+  )
+```
+## 测试
+-   启用测试
+    -   enable_testing()
+
+-   添加测试
+    -  add_test(NAME xxx COMMAND xxx):不测试结果，只测试应用程序是否运行、没有段错误或以其他方式崩溃，并且返回值为零
+    -  add_test(NAME Usage COMMAND Tutorial)
+       set_tests_properties(Usage PROPERTIES PASS_REGULAR_EXPRESSION "Usage:.*number")
+        测试结果里是否包含某些字符串
+    -   add_test(NAME StandardUse COMMAND Tutorial 4)
+        set_tests_properties(StandardUse PROPERTIES PASS_REGULAR_EXPRESSION "4 is 2")
+        测试结果是否正确
+    -   ```cmake
+        function(do_test target arg result)
+            add_test(NAME Comp${arg} COMMAND ${target} ${arg})
+            set_tests_properties(Comp${arg} PROPERTIES PASS_REGULAR_EXPRESSION ${result})
+        endfunction()
+
+        # do a bunch of result based tests
+        do_test(Tutorial 4 "4 is 2")
+        do_test(Tutorial 9 "9 is 3")
+        do_test(Tutorial 5 "5 is 2.236")
+        do_test(Tutorial 7 "7 is 2.645")
+        do_test(Tutorial 25 "25 is 5")
+        do_test(Tutorial -25 "-25 is (-nan|nan|0)")
+        do_test(Tutorial 0.0001 "0.0001 is 0.01")
+        ```
+        利用函数来测试
 
 
 

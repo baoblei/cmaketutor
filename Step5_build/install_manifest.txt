@@ -1,0 +1,5 @@
+/Users/baobinglei/cmaketutor/Step5_build/release/lib/libMathFunctions.a
+/Users/baobinglei/cmaketutor/Step5_build/release/lib/libSqrtLibrary.a
+/Users/baobinglei/cmaketutor/Step5_build/release/include/MathFunctions.h
+/Users/baobinglei/cmaketutor/Step5_build/release/bin/Tutorial
+/Users/baobinglei/cmaketutor/Step5_build/release/include/TutorialConfig.h
