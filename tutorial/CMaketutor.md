@@ -1,4 +1,4 @@
-#### file
+## 基础
 `CmakeLists.txt`
 #### 三个必要的命令
 
@@ -30,3 +30,26 @@ target_include_directories(Tutorial PUBLIC
 -   cd build
 -   cmake ../Step1    ("构建文件在Step1文件夹下")
 -   cmake --build .
+
+##库
+#### 创建库
+add_library():
+add_subdirectory(): 处理另一个目录下的CMakeLists.txt 文件
+target_link_libraries():
+target_include_directories():  add the binary tree to the search path for include files
+
+-   添加可选条件
+    -  option()
+    -  target_compile_definetions(name info USE_MYMATH):  set the compile definition "USE_MYMATH"
+    -  add_library()
+    -  target_link_libraried()
+
+  
+
+
+
+
+
+
+
+偏偏 这地球这么挤这么小这么瘦 太阳刻意晒的那么凶
